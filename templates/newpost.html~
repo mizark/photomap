@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+  <h2>Show us your cool experience!</h2>
+
+  <script>
+  var myload= function(){
+    function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb"  src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('filesToUpload').addEventListener('change', handleFileSelect, false);
+};
+window.onload=myload;
+
+
+</script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+    //Seting up Filepicker.io with your api key
+    filepicker.setKey('AesQ0NPJlQAy-EzhK0dFDz');
+
+    
+    $('#uploadbutton').click(function(){
+      filepicker.pickMultiple(function(fpfiles){
+        $('#pickResult').text(JSON.stringify(fpfiles));
+      });
+    });
+
+    })
+
+</script>
+
+
+
+    <form action="{{action}}" method="post" enctype="multipart/form-data">
+      <label>
+        <div>Subject:</div>
+        <input type="text" name="subject" value="{{subject}}">
+      </label>
+
+      <label>
+	<div>City:</div>  
+	<input type="text" name="city" value="{{city}}">
+      </label>
+
+      <label>
+	<div>State:</div>
+        <input type="text" name="state" value="{{state}}">
+      </label>
+
+      <label>
+	<button style="margin-bottom:10px" class="btn btn-primary" id="uploadbutton">Press to Upload Pics</button>
+	<div id="pickResult">Files uploaded: </div>
+
+
+	<input type="file"  name="filesToUpload" id="filesToUpload" multiple/><br>
+   
+        <output id="list"></output>
+
+
+
+      </label>
+
+      <label>
+        <div>Description:</div>
+        <textarea name="content">{{content}}</textarea>
+      </label>
+
+
+
+
+      <div class="error">{{error}}</div>
+
+      <input type="submit" name="submit" value="submit">
+    </form>
+{% endblock %}

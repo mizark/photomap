@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+#
+import os
+import urllib
+import webapp2
+import string
+import jinja2
+
+from google.appengine.ext import blobstore
+#from google.appengine.ext import webapp
+from google.appengine.ext.webapp import blobstore_handlers
+from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.api import images
+
+import main
+
+
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
+                               autoescape = True)
+
+def render_str(template, **params):
+    t = jinja_env.get_template(template)
+    return t.render(params)
+
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+  def post(self):
+    upload_files = self.get_uploads('files')
+
+    error=None
+    for x in upload_files:
+      if x.content_type.split('/')[0] != 'image':
+        error="All file uploads must be images of JPG, JPEG, or PNG format."
+    
+    #if not self.user:                                
+      #self.redirect('/blog')                                             
+    #self.response.out.write(webapp2.RequestHandler)
+
+  #def temptemp(self):
+    subject = self.request.get('subject')                                  
+    content = self.request.get('content')                                  
+    #postedby = self.user.name    
+
+                                                  
+    if subject and content and not error:                                                
+      p = main.Post(parent = main.blog_key(), subject = subject, 
+                    content = content #postedby=postedby,               
+                    )                                                            
+      for i in range(0,len(upload_files)):
+        p.photos.append(upload_files[i].key())
+        p.photo_urls.append("/serve/%s"%upload_files[i].key())
+                       
+
+      main.add_post(p)
+    
+      #main.user_posts(postedby,True)                                          
+      self.redirect('/blog/%s' % str(p.key().id()))                      
+    else:                                                                  
+      #error = "subject and content, please!"                             
+      render_str("newpost.html", subject=subject, content=content, error=error)
+      #self.response.out.write(error)
+
+class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
+  def get(self, resource):
+    resource = str(urllib.unquote(resource))
+    blob_info=blobstore.BlobInfo.get(resource)
+    self.send_blob(blob_info)
+
+
+
+app = webapp2.WSGIApplication([('/upload', UploadHandler),
+                               ('/serve/([^/]+)?',ServeHandler)], debug=True)

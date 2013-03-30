@@ -1,0 +1,37 @@
+<div class="post">
+  <div class="post-heading">
+    <div class="post-title">
+      <a class="post-title-link" href="{{p.permalink_url}}">{{p.subject}}</a>
+    </div>
+
+    <div class="post-date">
+      {{p.created.strftime("%l:%M %p -  %b %d, %Y")}}
+    </div>
+  </div>
+
+  <div class="posted-by">
+    Posted by: <a href="/blog/user/{{p.postedby}}">{{p.postedby}}</a>
+  </div>
+  
+  
+ 
+    <div class="map_canvas" style="height:400px;width:50%;float:left;border-radius:10px"></div>
+ 
+
+   <div style="height:400px;width:47%;float:left;padding-left:20px;padding-bottom:10px">
+    {% for x in p.photo_urls %}
+      <a class="fancybox" rel="fancybox[{{p.permalink_url}}]" href="{{x}}" ><img class="posted-pics" src="{{x}}=s130-c" hspace="1"></a>
+    {% endfor %}
+
+   </div>    
+
+  
+   
+
+
+  <div class="post-content">
+   <br> <strong><u>Description:</u></strong> {{p._render_text | safe}}
+  </div>
+
+
+</div>

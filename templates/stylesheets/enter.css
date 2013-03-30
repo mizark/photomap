@@ -1,0 +1,69 @@
+html { 
+     background: url('/templates/stylesheets/travel_0052.jpg') no-repeat center center fixed; 
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5000;
+}
+
+.back_map {
+	  margin:0 auto;
+	  border-radius:10px;
+}
+
+
+
+.transbox
+  {
+  position: absolute; 
+  width:90%;
+  left:5%;
+  height:55%;
+  bottom:30%;
+  background-color:black;
+  #border:1px solid black;
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+  border-radius:15px;
+  }
+.title
+  {
+  position:absolute;
+  height:40%;
+  bottom:40%;
+  width:90%;
+  left:5%;
+  font-size:40px;
+  font-weight:bold;
+  font-family: helvetica;
+  text-align: center;
+  color:#ffffff;
+  }
+
+.enter{
+	background-color: #104E8B;
+	border: 2px solid black;
+	border-radius: 10px;
+	color:#ffffff;
+	padding:10px;
+	text-decoration:none;
+	font-size:25;
+}
+
+.enter:visited{
+	color:#ffffff;
+
+}
+
+.enter:hover{
+	background-color: #1874CD
+}	 

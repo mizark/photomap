@@ -1,0 +1,45 @@
+<!-- <!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Login</title>
+    <link type="text/css" rel="stylesheet" href="/static/main.css">
+
+  </head>
+-->
+{% extends "base.html" %}
+
+{% block content %}
+  <body>
+    <h2 class="h2center">Login</h2>
+    <form method="post">
+      <table class="center">
+        <tr>
+          <td class="label">
+            Username
+          </td>
+          <td>
+            <input class="sign" type="text" name="username" value="{{username}}">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            Password
+          </td>
+          <td>
+            <input class="sign" type="password" name="password" value="">
+          </td>
+        </tr>
+      </table>
+
+      <div class="error">
+        {{error}}
+      </div>
+      <div class="submitbutton">
+	<input type="submit" value="submit">
+      </div>
+    </form>
+  </body>
+
+{% endblock %}

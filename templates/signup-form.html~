@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+<!--
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Sign Up</title>
+    
+    <link type="text/css" rel="stylesheet" href="/static/main.css">
+    
+  </head>
+-->
+{% block content %}  
+  <body>
+    <h2 class="h2center">Signup</h2>
+    <form method="post">
+      <table class="center">
+        <tr>
+          <td class="label">
+            Username
+          </td>
+          <td>
+            <input class="sign" type="text" name="username" value="{{username}}">
+          </td>
+          <td class="error">
+            {{error_username}}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            Password
+          </td>
+          <td>
+            <input class="sign" type="password" name="password" value="">
+          </td>
+          <td class="error">
+            {{error_password}}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            Verify Password
+          </td>
+          <td>
+            <input class="sign" type="password" name="verify" value="">
+          </td>
+          <td class="error">
+            {{error_verify}}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            Email (optional)
+          </td>
+          <td>
+            <input class="sign" type="text" name="email" value="{{email}}">
+          </td>
+          <td class="error">
+            {{error_email}}
+          </td>
+        </tr>
+      </table>
+      <div class="submitbutton">
+	<input type="submit">
+      </div>  	
+    </form>
+  </body>
+{% endblock %}
+

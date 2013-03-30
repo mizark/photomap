@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+      $('document').ready(function() {
+
+        userurl=$('.post-title-link').attr("href")
+
+        $.ajax({
+               type: 'GET',
+               url: userurl+'.json',
+
+               success: function (data) {
+                     
+                     var mapOptions = {
+                       center: new google.maps.LatLng(38.8900, -77.0300),
+                       zoom: 2,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP
+                     };
+                     var map = new google.maps.Map(document.getElementById('user_map'),mapOptions);
+                     
+                     for(var x=0; x<data.length;x++){
+			var marker=new google.maps.Marker({
+				      position: new google.maps.LatLng(data[x].city_latitude, data[x].city_longitude),
+				      map:map,
+			});
+		     }
+	        }
+                           
+         })
+
+      })
+</script>
+
+
+
+
+
+
+
+
+ <div class="post-title-link" href="/blog/user/{{username}}"></div> 
+
+  <a class="btn btn-primary" href="/blog/newpost">Add New Experience</a>
+
+  <br>
+
+
+  <div class="user-title">
+    Places {{username}} has been
+  </div>
+
+  
+  <div id="user_map" style="height:400px;width:100%"></div>
+
+  <br>
+  <div class="user-title">
+    {{username}}'s experiences
+  </div>
+
+  {% for p in posts %}
+    {{ p.render() | safe }}
+    <br><br>
+  {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+
+  
+ 
+      <a class="btn btn-primary" href="/blog/newpost">Add New Experience</a>
+     
+  
+  <div class="post-title-link" href="/blog"></div>
+
+  <br><br>
+  
+  {% for p in posts %}
+    {{ p.render() | safe }}
+    <br><br>
+  {% endfor %}
+
+  <div class="age">
+    {{age}}
+  </div>
+
+{% endblock %}

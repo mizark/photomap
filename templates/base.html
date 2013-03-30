@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>photomap</title>
+
+  <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="public">
+
+  <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+  <link type="text/css" rel="stylesheet" href="/templates/stylesheets/main.css"/>
+  <link href="/templates/stylesheets/lightbox.css" rel="stylesheet"/> 
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/lightbox.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
+  </script>
+  <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+
+  <!-- Add mousewheel plugin (this is optional) -->
+  <script type="text/javascript" src="/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  <script type="text/javascript" src="/js/mapgpspoints.js"></script>
+  <script type="text/javascript" src="/js/photogalleryeffects.js"></script>
+
+<!--
+  <script type="text/javascript">
+    function makeFileList() {
+      var input=document.getElementById('filesToUpload');
+      var list=document.getElementById('fileList');
+    
+      while (list.hasChildNodes()) {
+        list.removeChild(ul.firstChild);
+      } 
+
+      for (var x=0; x<input.files.length; x++){
+        var li=document.createElement('li');
+        li.innerHTML='Image '+(x+1)+': '+input.files[x].name;
+	li.innerHTML='<img src=input.files[x] height="40px" width="40px"/>';				  
+        list.appendChild(li);
+      }
+      if(!list.hasChildNodes()) {
+	var li=document.createElement("li");
+	li.innerHTML = 'No Files Selected';
+	list.appendChild(li);
+      }
+    }
+
+  </script>
+
+-->
+
+</head>
+
+<body>
+
+<style>
+  .navbar-inner {
+    border:none;
+
+    -webkit-border-radius: 0;
+
+    border-radius: 0;
+
+    -moz-border-radius: 0;
+
+    o-border-radius: 0;
+
+    background: black;
+
+  }
+
+
+  .navbar .nav > li > a {
+    color: white;
+    text-shadow:none;
+  }
+</style>
+
+  
+
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div style="width:900px;margin:auto;text-shadow:none">
+        <a class="brand" href="/blog"><strong style="color:white;text-shadow:none">photomap</strong></a>
+        <ul class="nav pull-right">
+
+	  {% if user %}	  
+            <li><a href="/blog/user/{{user.name}}" style="text-shadow:none">{{user.name}}</a></li>
+	    <li><a href="/logout">logout</a></li>
+	  {% else %}
+	    <li><a href="/login">login</a></li>
+	    <li><a href="/signup">signup</a></li>
+	  {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!--
+<body>
+  <div class="banner"></div>
+  <div id="container">
+
+    <a href="/blog" class="main-title">
+       spectize
+    </a>
+  
+  
+    <div class="login-area">
+      {% if user %}
+        <a class="login-link" href="/blog/user/{{user.name}}">{{user.name}}</a>
+ | <a class="login-link" href="/logout">logout</a>
+      {% else %}
+        <a class="login-link" href="/login">login</a>
+        |
+        <a class="login-link" href="/login">signup</a>
+      {% endif %}
+    </div>
+-->
+      
+    <div id="container">
+      {% block content %} 
+      {% endblock %}
+    
+
+  </div>
+
+
+</body>
+
+</html>
+

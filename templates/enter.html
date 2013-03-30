@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+<!-- 
+
+ <link type="text/css" rel="stylesheet" href="/templates/stylesheets/enter.css"\
+ />
+-->
+  <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>  
+
+  <title>Spectize</title>
+</head>
+
+
+<body style="background: url('/templates/stylesheets/greyvariation.png')">
+
+
+<style>
+  .navbar-inner {
+    border:none;
+
+    -webkit-border-radius: 0;
+
+    border-radius: 0;
+
+    -moz-border-radius: 0;
+
+    o-border-radius: 0;
+
+    background: black;
+
+  }
+
+
+  .navbar .nav > li > a {
+    color: white;
+    text-shadow:none;
+  }
+</style>
+
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div style="width:800px;margin:auto;text-shadow:none">
+        <a class="brand" href="/"><strong style="color:white;text-shadow:none">spectize</strong></a>
+        <ul class="nav pull-right">
+          <li><a href="/" style="text-shadow:none">home</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      
+  <h1 class="title" style="text-align:center;margin-top: 60px;color:white">
+        Hello. Welcome to Spectize.
+  </h1>
+    	    
+
+  <div class="invite" style="margin-top:30px;text-align: center;" >
+     
+	<form action="#" method="post" id="email">
+	    <input type="text" class="input-large" placeholder="Leave us your email for an invite" name="email" id="inputtypeemail"/>
+	    <button type="submit" class="btn" style="margin-top:-9px" >submit</button>
+	</form>
+	<div class="success alert alert-success" style="display: none; padding-top: 5px; padding-bottom: 5px;width:400px;margin:auto;margin-bottom:22px;text-align:center">
+          Thank you! As soon as we launch, we'll email you!
+        </div>
+        <div class="fail alert alert-error" style="display: none; margin-bottom: 10px; padding-top: 5px; padding-bottom: 5px;width:400px;margin:auto;margin-bottom:22px;text-align:center">
+           Sorry friend! That's an invalid email. Try again!
+          <a class="close">x</a>
+        </div>
+  </div>
+    
+
+  <div style="background:black;text-align:center;padding-top:30px;width:800px;margin:auto;border-radius:10px">
+
+    
+    <h3 style="color:white;width:750px;margin:auto">
+      Share and see the essence of amazing experiences. 
+
+    </h3>
+ 
+    <br>
+
+    <div style="height:300px">
+      <img src="/templates/stylesheets/capture1.png" style="width:250px;height:250px;display:none" id="pic1">
+      <img src="/templates/stylesheets/capture2.png" style="width:250px;height:250px;display:none" id="pic2">
+      <img src="/templates/stylesheets/capture3.png" style="width:250px;height:250px;display:none" id="pic3">
+      <img src="/templates/stylesheets/capture4.png" style="width:250px;height:250px;display:none" id="pic4">
+      <img src="/templates/stylesheets/capture5.png" style="width:250px;height:250px;display:none" id="pic5">
+    </div>
+    <!--
+    <h4 style="color:white;width:600px;margin:auto;padding-bottom:50px;margin-top:-20px">
+    Condense your vast collections of photos into simple packages so others can quickly discover new experiences see the best of what you have seen.
+    </h4>
+    -->
+
+
+  </div>
+  <br>
+  <h3 style="text-align:center;color:white">It's simple:</h3>
+
+  
+
+
+  <div class="row-fluid" style="width:900px;margin:auto;text-align:center;color:white;margin-bottom:30px">
+      <div class="span4" style="padding:10px">
+	<h4>1.<br><br>Have a cool experience.<br> Take lots of photos.<h4>
+      </div>
+      <div class="span4" style="padding:10px">
+	<h4>2.<br><br>Submit the photos that best convey the experience.<h4>
+      </div>
+      <div class="span4" style="padding:10px">
+	<h4>3.<br><br>Share your packaged experience with the world. Quickly discover cool experiences happening around you.<h4>
+      </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $("#inputtypeemail").focus(function(e){
+        $(this).attr('placeholder','');
+      });
+    
+      $("#inputtypeemail").blur(function(e){
+        $(this).attr('placeholder','Leave us your email for an invite');
+      });
+
+
+      $("#email").submit(function(e) {
+        e.preventDefault();
+
+        
+
+        $.post("/invites", $(this).serialize(), function(data) {
+          if(data=='success') {
+            $("#email").hide();
+            $(".success").fadeIn('medium');
+          } else {
+            $("#email").hide();
+            $(".fail").fadeIn('medium');
+          }
+        });
+      });
+
+      $("a.close").click(function() {
+        $(this).parent().hide();
+        $("#email").fadeIn('medium');
+      });
+    
+    
+    function slideshow(){
+
+      $('#pic1').fadeIn(1500).delay(3500).fadeOut(1500,function(){
+      $('#pic2').fadeIn(1500).delay(3500).fadeOut(1500,function(){
+      $('#pic3').fadeIn(1500).delay(3500).fadeOut(1500,function(){
+      $('#pic4').fadeIn(1500).delay(3500).fadeOut(1500,function(){
+      $('#pic5').fadeIn(1500).delay(3500).fadeOut(1500,function(){
+      $('#pic5').stop()
+
+    
+      });});});});});
+ 
+  
+    };
+    slideshow();
+    setInterval(function(){slideshow();},32505);
+    
+    
+  });
+  </script>
+
+
+</body>
+
+
+<html>
